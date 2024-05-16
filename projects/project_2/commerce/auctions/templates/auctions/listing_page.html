@@ -1,0 +1,87 @@
+{% extends "auctions/layout.html" %}
+
+
+{% block body %}
+    <h2>{{ listing_item.title }}</h2>
+    {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}" role="alert">
+                    {{ message|safe }}
+                </div>                      
+            {% endfor %}
+    {% endif %}
+
+    <div class="listing-page-container">
+        {% if listing_item.image %}
+            <img class="listing-page-image" src="{{ listing_item.image }}" alt="{{ listing_item.title }}">
+        {% elif not listing_item.image %}
+            <img src="https://www.survivorsuk.org/wp-content/uploads/2017/01/no-image.jpg" alt="No image available">
+        {% endif %}
+        <p class="listing-page-description">{{ listing_item.description }}</p>
+        <p class="listing-page-price">${{ listing_item.highest_bid.amount }}</p>
+        <div class="listing-page-details">
+            <p>Listed at: {{ listing_item.created_at }}   By: <strong>{{ listing_item.created_by }}</strong></p>
+        </div>
+        {% if user.is_authenticated and winner is None %}
+            <!-- Bid functionality -->
+            <div class="listing-page-bid">
+                <form action="{% url "place_bid" listing_item.id %}" method="post">
+                    {% csrf_token %}
+                    <input type="number" name="amount" class="form-control">
+                    <button type="submit" class="btn btn-primary" id="bid-btn">Place Bid</button>
+                </form>    
+            </div>
+
+            <br>
+            <!-- Watchlist functionality -->
+            <div class="listing-page-watchlist-close-container">
+                {% if exists_on_watchlist %}
+                    <form action="{% url "change_watchlist" listing_item.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Delete from watchlist</button>
+                    </form>
+                {% else %}
+                    <form action="{% url "change_watchlist" listing_item.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary">Add to Watchlist</button>
+                    </form>
+                {% endif %}
+
+                <br>
+                {% if request.user == listing_item.created_by %}
+                    <div id="close-btn">
+                        <form action="{% url "close_auction" listing_item.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Close Auction</button>
+                        </form>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="listing-page-add-comment">
+                <form action="{% url "add_comment" listing_item.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {{ form }}
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-success" value="Add comment">
+                    </div>
+                </form>
+            </div>
+        {% endif %}
+
+
+        {% for comment in comments %}
+            {% if comment.listing == listing_item %}
+                <div class="listing-page-comments">
+                    <h5>Comment by: <strong>{{ comment.user }}</strong></h5>
+                    <p>{{ comment.content }}</p>
+                    <p>Created on: {{ comment.timestamp }}</p>
+                </div>   
+            {% endif %}
+        {% endfor %}
+    </div>
+
+
+{% endblock %}

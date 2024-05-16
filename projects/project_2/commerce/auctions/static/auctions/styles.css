@@ -1,0 +1,124 @@
+* {
+    font-family: 'Questrial', serif;
+}
+    
+
+body {
+    padding: 10px;
+}
+
+/* Listing item styling */
+.listing-item-container {
+    display: flex;
+    border: 2px solid lightgray ;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.listing-item-image {
+    max-width: 500px;
+}
+
+.listing-item-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+.listing-item-info {
+    padding: 10px;
+    margin-left: 20px;
+}
+
+.listing-item-info > h3 {
+    font-weight: bold;
+}
+
+.listing-item-info > p.created-at {
+    font-size: 14px;
+    color: #666;
+}
+
+#listing-link {
+    color: #333;
+    text-decoration: none;
+}
+
+#listing-link:hover {
+    color: #666;
+    text-decoration: none;
+}
+
+
+/* Index page styling */
+h2 {
+    padding: 20px;
+}
+
+
+/* Listing-page styling */
+.listing-page-container {
+    padding: 20px;
+}
+
+.listing-page-image {
+    max-width: 800px;
+    padding-bottom: 20px;
+}
+
+.listing-page-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+.listing-page-description {
+    font-size: 22px;
+}
+
+.listing-page-price {
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.listing-page-details {
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.listing-page-bid {
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#bid-btn {
+    margin-top: 20px;
+    display: flex;
+}
+
+.listing-page-watchlist-close-container {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+#close-btn {
+    margin-left: 20px;
+}
+
+.listing-page-comments {
+    border: 2px solid lightgray ;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.listing-page-add-comment {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.create-listing-page {
+    display: flex;
+    align-items: center;
+    margin-top: 40px;
+}

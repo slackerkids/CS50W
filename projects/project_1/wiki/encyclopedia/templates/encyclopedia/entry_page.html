@@ -1,0 +1,15 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock title %}
+
+{% block body %}
+    {% if not page %}
+        <h1>Requested page not found.</h1>
+    {% else %}
+        {{ page | safe }}
+        <br>
+        <a href="/edit_page/{{ title }}"><input type="submit" value="Edit page"></a>
+    {% endif %}
+{% endblock %}

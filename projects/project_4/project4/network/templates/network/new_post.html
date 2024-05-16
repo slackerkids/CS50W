@@ -1,0 +1,15 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+<h2>New Post</h2>
+{% if message %}
+    {{ message }}
+{% endif %}
+<form action="{% url "new_post" %}" method="post">
+    {% csrf_token %}
+    <div class="new_post-container"></div>
+        <textarea name="content" required class="form-control" placeholder="Type something..." id="floatingTextarea2" style="height: 100px"></textarea>
+        <button type="submit" class="btn btn-primary">Publish</button>
+    </div>
+</form>
+{% endblock body %}

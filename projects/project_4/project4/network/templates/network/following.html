@@ -1,0 +1,25 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+<h2>Following posts</h2>
+
+    {% for post in posts %}
+        <div class="post-container">
+            <div id="post-user">
+                <a href="{% url "profile_page" post.created_by %}">
+                    {{ post.created_by }}
+                </a> 
+            </div>
+            <div id="post-content-edit_button">
+                <p>{{ post.content }}</p>
+            </div>
+            <div id="timestamp">{{ post.timestamp }}</div>
+            <div class="like">
+                <button class="like-button" data-post-id="{{ post.id }}">
+                    <i class="fa-solid fa-heart" style="color: #ff4013;"></i>
+                </button>
+                <div id="like-count-{{ post.id }}">{{ post.like_count }}</div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock body %}

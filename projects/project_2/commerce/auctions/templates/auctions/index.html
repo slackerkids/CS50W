@@ -1,0 +1,25 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+
+    {% for listing_item in listing_items %}
+        <a id="listing-link" href="{% url "listing_page" listing_item.id %}">
+            <div class="listing-item-container">
+                <div class="listing-item-image">
+                    {% if listing_item.image %}
+                    <img src="{{ listing_item.image }}" alt="{{ listing_item.title }}">
+                    {% elif not listing_item.image %}
+                    <img src="https://www.survivorsuk.org/wp-content/uploads/2017/01/no-image.jpg" alt="No image available">
+                    {% endif %}
+                </div>
+                <div class="listing-item-info">
+                    <h3>{{ listing_item.title }}</h3>
+                    <p><strong>Price: </strong>${{ listing_item.highest_bid.amount }}</p>
+                    <p>{{ listing_item.description }}</p>
+                    <p class="created-at">Created at: {{ listing_item.created_at }}</p>
+                </div>
+            </div>
+        </a>
+    {% endfor %}
+{% endblock %}
